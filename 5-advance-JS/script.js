@@ -119,7 +119,9 @@ console.log(rates);
 
 */
 
-//Function returning functions
+/**************************************/ //Function returning functions
+
+/*
 
 function interviewQuestion(job) {
   if (job === "designer") {
@@ -137,12 +139,33 @@ function interviewQuestion(job) {
   }
 }
 
-// var teacherQuestion = interviewQuestion("teacher");
-// console.log(teacherQuestion);
-// teacherQuestion("John");
+var teacherQuestion = interviewQuestion("teacher");
+console.log(teacherQuestion);
+teacherQuestion("John");
 
-// var designerQuestion = interviewQuestion("designer");
-// console.log(designerQuestion);
-// teacherQuestion("Bobar");
+var designerQuestion = interviewQuestion("designer");
+console.log(designerQuestion);
+teacherQuestion("Bobar");
 
 interviewQuestion("engineer")("Bob");
+
+*/
+
+/************************/ //Immediately invoked function expressions(IIFE)
+//Not reusable but good for data privacy
+
+//V1
+
+function game() {
+  var score = Math.floor(Math.random() * 10) + 1;
+  console.log(score >= 5);
+}
+
+game();
+
+//V2
+
+(function() {
+  var score = Math.floor(Math.random() * 10) + 1;
+  console.log(score >= 5);
+})();
