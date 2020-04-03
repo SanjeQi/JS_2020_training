@@ -210,16 +210,63 @@ interviewQuestion("engineer")("Bob");
 
 // refactor the above function
 
-function interviewQuestion(job) {
-  return function(name) {
-    if (job === "designer") {
-      console.log(name + ", what is UX?");
-    } else if (job === "teacher") {
-      console.log(name + ", what are you teaching?");
-    } else {
-      console.log("Unknown job. Pls tell us " + name + ", what do you do?");
-    }
-  };
-}
+// function interviewQuestion(job) {
+//   return function(name) {
+//     if (job === "designer") {
+//       console.log(name + ", what is UX?");
+//     } else if (job === "teacher") {
+//       console.log(name + ", what are you teaching?");
+//     } else {
+//       console.log("Unknown job. Pls tell us " + name + ", what do you do?");
+//     }
+//   };
+// }
 
-interviewQuestion("edsad")("Bob");
+// interviewQuestion("edsad")("Bob");
+
+//// Bind, call and apply
+
+var john = {
+  name: "John",
+  age: 25,
+  job: "teacher",
+  presentation: function(style, timeOfDay) {
+    if (style === "formal") {
+      console.log(
+        "Good" +
+          timeOfDay +
+          ", ladies and gentlemen! I'm " +
+          this.name +
+          " and I'm a " +
+          this.job +
+          ". I am " +
+          this.age +
+          " years old."
+      );
+    } else if (style === "friendly") {
+      console.log(
+        "Hey! Whats up? I'm " +
+          this.name +
+          " and I'm a " +
+          this.job +
+          ". I am " +
+          this.age +
+          " years old." +
+          " Have a nice " +
+          timeOfDay +
+          "."
+      );
+    }
+  }
+};
+
+var emily = {
+  name: "Emily",
+  age: 35,
+  job: "designer"
+};
+
+john.presentation("friendly", "morning");
+john.presentation.call(emily, "friendly", "afternoon");
+
+//john.presentation.apply(emily, ["friendly", "morning"]);
