@@ -156,16 +156,70 @@ interviewQuestion("engineer")("Bob");
 
 //V1
 
-function game() {
-  var score = Math.floor(Math.random() * 10) + 1;
-  console.log(score >= 5);
-}
+// function game() {
+//   var score = Math.floor(Math.random() * 10) + 1;
+//   console.log(score >= 5);
+// }
 
-game();
+// game();
 
 //V2
 
-(function() {
-  var score = Math.floor(Math.random() * 10) + 1;
-  console.log(score >= 5);
-})();
+// (function() {
+//   var score = Math.floor(Math.random() * 10) + 1;
+//   console.log(score >= 5);
+// })();
+
+///////////////////////////////////////////Closures
+
+//The inner function has always access to the variables and parameters of the outer function, even after the outer function has returned.
+
+// function retirement(retirementAge) {
+//   return function(yearOfBirth) {
+//     var a = " years left until retirement";
+//     var age = 2020 - yearOfBirth;
+//     console.log(retirementAge - age + a);
+//   };
+// }
+
+// var retirementUS = retirement(66);
+// retirementUS(1982);
+
+// var retirementEU = retirement(65);
+// retirementEU(1982);
+
+// retirement(66)(1982);
+
+// function interviewQuestion(job) {
+//   if (job === "designer") {
+//     return function(name) {
+//       console.log(name + ", what is UX?");
+//     };
+//   } else if (job === "teacher") {
+//     return function(name) {
+//       console.log(name + ", what are you teaching?");
+//     };
+//   } else {
+//     return function(name) {
+//       console.log("Unknown job. Pls tell us " + name + ", what do you do?");
+//     };
+//   }
+// }
+
+// interviewQuestion("designer")("Bill");
+
+// refactor the above function
+
+function interviewQuestion(job) {
+  return function(name) {
+    if (job === "designer") {
+      console.log(name + ", what is UX?");
+    } else if (job === "teacher") {
+      console.log(name + ", what are you teaching?");
+    } else {
+      console.log("Unknown job. Pls tell us " + name + ", what do you do?");
+    }
+  };
+}
+
+interviewQuestion("edsad")("Bob");
