@@ -224,7 +224,7 @@ interviewQuestion("engineer")("Bob");
 
 // interviewQuestion("edsad")("Bob");
 
-//// Bind, call and apply
+////  call and apply
 
 var john = {
   name: "John",
@@ -233,7 +233,7 @@ var john = {
   presentation: function(style, timeOfDay) {
     if (style === "formal") {
       console.log(
-        "Good" +
+        "Good " +
           timeOfDay +
           ", ladies and gentlemen! I'm " +
           this.name +
@@ -270,3 +270,34 @@ john.presentation("friendly", "morning");
 john.presentation.call(emily, "friendly", "afternoon");
 
 //john.presentation.apply(emily, ["friendly", "morning"]);
+
+//////////////// Bind
+
+var johnFriendly = john.presentation.bind(john, "friendly");
+johnFriendly("afternoon");
+
+var emilyFormal = john.presentation.bind(emily, "formal");
+emilyFormal("morning");
+
+var years = [1982, 1965, 1937, 2005, 1998];
+
+function arrayCalc(arr, fn) {
+  var arrRes = [];
+  for (var i = 0; i < arr.length; i++) {
+    arrRes.push(fn(arr[i]));
+  }
+  return arrRes;
+}
+
+function calculateAge(el) {
+  return 2020 - el;
+}
+
+function isFullAge(limit, el) {
+  return el >= limit;
+}
+
+var ages = arrayCalc(years, calculateAge);
+var fullJapan = arrayCalc(ages, isFullAge.bind(this, 20));
+console.log(ages);
+console.log(fullJapan);
