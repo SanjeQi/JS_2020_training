@@ -1,10 +1,8 @@
 var budgetController = (function () {
   var x = 23;
-
   var add = function (a) {
     return x + a;
   };
-
   return {
     publicTest: function (b) {
       return add(b);
@@ -13,15 +11,15 @@ var budgetController = (function () {
 })();
 
 var UIController = (function () {
-  //some code
+  //somecode
 })();
 
-var controller = (function (budgetCtrl, UICtrl) {
-  var z = budgetController.publicTest(5);
+var controllrer = (function (budgetCtrl, UICtrl) {
+  var z = budgetCtrl.publicTest(5);
 
   return {
     anotherPublic: function () {
-      return console.log(z);
+      console.log(z);
     },
   };
 })(budgetController, UIController);
