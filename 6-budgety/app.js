@@ -27,7 +27,7 @@ var UIController = (function () {
 
 //Global APP Controller
 var controller = (function (budgetCtrl, UICtrl) {
-  var DOM = UICtrl.getDOMstrings;
+  var DOM = UICtrl.getDOMstrings();
   var ctrlAddItem = function () {
     // 1.Get the filed input data
     var input = UICtrl.getInput();
@@ -39,7 +39,6 @@ var controller = (function (budgetCtrl, UICtrl) {
   };
 
   document.querySelector(DOM.inputBtn).addEventListener("click", ctrlAddItem);
-
   document.addEventListener("keypress", function (event) {
     if (event.keyCode === 13 || event.which === 13) {
       ctrlAddItem();
