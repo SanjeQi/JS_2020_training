@@ -28,7 +28,7 @@ var budgetController = (function () {
         ID = 0;
       }
 
-      //Create new item based on 'inc' or 'exp' type
+      //Create new item based on 'inc' or 'exp'
       if (type === "exp") {
         newItem = new Expense(ID, des, val);
       } else if (type === "inc") {
@@ -63,7 +63,7 @@ var UIController = (function () {
       return {
         type: document.querySelector(DOMstrings.inputType).value, // will be:  inc or exp
         description: document.querySelector(DOMstrings.inputDescription).value,
-        value: document.querySelector(DOMstrings.inputValue).value,
+        value: parseFloat(document.querySelector(DOMstrings.inputValue).value),
       };
     },
 
@@ -124,16 +124,18 @@ var controller = (function (budgetCtrl, UICtrl) {
     var input, newItem;
     // 1.Get the filed input data
     input = UICtrl.getInput();
-    // 2.Add  the item to the budgetController
-    newItem = budgetCtrl.addItem(input.type, input.description, input.value);
-    // 3.Add the item to the UI
-    UICtrl.getListItems(newItem, input.type);
-    //4. Clear the fields
-    UICtrl.clearFields();
+    if (input.description !== "" && !isNaN(input.value) && input.value > 0) {
+      // 2.Add  the item to the budgetController
+      newItem = budgetCtrl.addItem(input.type, input.description, input.value);
 
-    // 5.Calculate the budget
+      // 3.Add the item to the UI
+      UICtrl.getListItems(newItem, input.type);
+      //4. Clear the fields
+      UICtrl.clearFields();
+      // 5.Calculate the budget
 
-    // 6.Display the new budget to the UI
+      // 6.Display the new budget to the UI
+    }
   };
   return {
     init: function () {
