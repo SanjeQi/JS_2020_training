@@ -154,9 +154,9 @@ var UIController = (function () {
       int = int.substr(0, int.length - 3) + "," + int.substr(int.length - 3, 3);
       // input val 2310-> 2,310
       // input val "25678" -> '26,679'
-      dec = numSplit[1];
-      return type === "exp" ? "-" : "+" + " " + int + "." + dec;
     }
+    dec = numSplit[1];
+    return (type === "exp" ? "-" : "+") + " " + int + "." + dec;
   };
 
   return {
