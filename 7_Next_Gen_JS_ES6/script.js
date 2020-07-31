@@ -125,15 +125,31 @@
 
 ///////////////////////////////////////Arrow function part 2
 
-//ES5
+// //ES5
+// var box5 = {
+//   color: 'green',
+//   position: 1,
+//   clickMe: function () {
+//     var self = this;
+//     document.querySelector('.green').addEventListener('click', function () {
+//       var str =
+//         'This is box number is: ' + self.position + ' and is ' + self.color;
+//       alert(str);
+//     });
+//   },
+// };
+
+// box5.clickMe();
+
+//ES6
+
 var box5 = {
   color: 'green',
   position: 1,
   clickMe: function () {
-    var self = this;
-    document.querySelector('.green').addEventListener('click', function () {
-      var str =
-        'This is box number is: ' + self.position + ' and is ' + self.color;
+    document.querySelector('.green').addEventListener('click', () => {
+      const str =
+        'This is box number is: ' + this.position + ' and is ' + this.color;
       alert(str);
     });
   },
