@@ -97,28 +97,44 @@
 // console.log(n.includes('i')); // -> true
 // console.log(n.repeat(5)); // -> John SmithJohn SmithJohn SmithJohn SmithJohn Smith
 
-////////////////////////////////////Arrow functions
+// //////////////////////////////////Arrow functions
 
-const years = [1990, 1991, 1992, 1993];
+// const years = [1990, 1991, 1992, 1993];
+
+// //ES5
+// var ages5 = years.map(function (cur, indx, arr) {
+//   return 2020 - cur;
+// });
+// console.log(ages5);
+
+// //ES6
+
+// let ages6 = years.map((cur) => 2020 - cur);
+// console.log(ages6);
+
+// const ages7 = years.map((el, indx) => `Age element ${indx}: ${2020 - el}`);
+// console.log(ages7);
+
+// const ages8 = years.map((el, indx) => {
+//   const now = new Date().getFullYear();
+//   const age = now - el;
+//   return `Age element ${indx}: ${2020 - el}`;
+// });
+
+// console.log(ages8);
+
+///////////////////////////////////////Arrow function part 2
 
 //ES5
-var ages5 = years.map(function (cur, indx, arr) {
-  return 2020 - cur;
-});
-console.log(ages5);
+var box5 = {
+  color: 'green',
+  position: 1,
+  clickMe: function () {
+    document.querySelector('.green').addEventListener('click', function () {
+      var str = 'This is box number ' + this.position + ' and is ' + this.color;
+      alert(str);
+    });
+  },
+};
 
-//ES6
-
-let ages6 = years.map((cur) => 2020 - cur);
-console.log(ages6);
-
-const ages7 = years.map((el, indx) => `Age element ${indx}: ${2020 - el}`);
-console.log(ages7);
-
-const ages8 = years.map((el, indx) => {
-  const now = new Date().getFullYear();
-  const age = now - el;
-  return `Age element ${indx}: ${2020 - el}`;
-});
-
-console.log(ages8);
+box5.clickMe();
