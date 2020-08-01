@@ -204,29 +204,38 @@
 
 ///////////////////////////////Destructuring
 
-//ES5
-var john = ['John', 26];
-var name = john[0];
-var age = john[1];
-console.log(name, age);
+// //ES5
+// var john = ['John', 26];
+// var name = john[0];
+// var age = john[1];
+// console.log(name, age);
 
-//ES6
+// //ES6
 
-/////////////// Array
-const [name, age] = ['John', 23];
-console.log(name, age);
+// /////////////// Array
+// const [name, age] = ['John', 23];
+// console.log(name, age);
 
-/////////////// Object
-const obj = {
-  firstName: 'John',
-  lastName: 'Snow',
-};
+// /////////////// Object
+// const obj = {
+//   firstName: 'John',
+//   lastName: 'Snow',
+// };
 
-// Object v1
-const { firstName, lastName } = obj;
-console.log(firstName, lastName);
+// // Object v1
+// const { firstName, lastName } = obj;
+// console.log(firstName, lastName);
 
-// Object v2 use with different variable nemes instead of the keys from the object
+// // Object v2 use with different variable nemes instead of the keys from the object
 
-const { firstName: a, lastName: b } = obj;
-console.log(a, b);
+// const { firstName: a, lastName: b } = obj;
+// console.log(a, b);
+
+/////////////// Functions
+function calcAgeRetirenment(year) {
+  const age = new Date().getFullYear() - year;
+  return [age, 65 - age];
+}
+
+const [age, retirement] = calcAgeRetirenment(1982);
+console.log(age, retirement);
