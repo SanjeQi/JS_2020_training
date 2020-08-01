@@ -232,10 +232,67 @@
 // console.log(a, b);
 
 /////////////// Functions
-function calcAgeRetirenment(year) {
-  const age = new Date().getFullYear() - year;
-  return [age, 65 - age];
+// function calcAgeRetirenment(year) {
+//   const age = new Date().getFullYear() - year;
+//   return [age, 65 - age];
+// }
+
+// const [age, retirement] = calcAgeRetirenment(1982);
+// console.log(age, retirement);
+
+///////////////////////////////////////////////////////////// Arrays
+
+const boxes = document.querySelectorAll('.box'); // <-- Node List
+
+//ES5
+
+var boxArr5 = Array.prototype.slice.call(boxes); // <-- Array
+console.log(boxArr5);
+
+boxArr5.forEach(function (el) {
+  el.style.background = 'dodgerblue';
+});
+
+//ES6
+
+const boxArr6 = Array.from(boxes); // <-- Array
+
+boxArr6.forEach((el) => {
+  el.style.background = 'dodgerblue';
+});
+
+//ES5
+for (var i = 0; i < boxArr5.length; i++) {
+  if (boxArr5[i].className === 'box blue') {
+    //continue;
+    break;
+  }
+  boxArr5[i].textContent = 'I changed to blue';
 }
 
-const [age, retirement] = calcAgeRetirenment(1982);
-console.log(age, retirement);
+//ES6  for-of  loop
+for (const cur of boxArr6) {
+  if (cur.className.includes('blue')) {
+    continue;
+  }
+  cur.textContent = 'I changed to blue';
+}
+
+ES5;
+var ages = [12, 17, 8, 21, 14, 11];
+
+var full = ages.map(function (cur) {
+  return cur >= 18;
+});
+console.log(full);
+
+var z = full.indexOf(true);
+console.log(z, ages[z]);
+
+//ES6
+var ages = [12, 17, 8, 21, 14, 11];
+
+const z = ages.findIndex((cur) => {
+  cur >= 18;
+});
+console.log(z);
