@@ -170,3 +170,34 @@ var box5 = {
 };
 
 box5.clickMe();
+
+function Person(name) {
+  this.name = name;
+}
+
+//ES5
+Person.prototype.myFrinds5 = function (friends) {
+  var arr = friends.map(
+    function (el) {
+      return this.name + ' is friends with ' + el;
+    }.bind(this)
+  );
+  console.log(arr);
+};
+
+var friends = ['Bob', 'Jane', 'Mark'];
+const john = new Person('John').myFrinds5(friends);
+console.log(john);
+
+ES6;
+
+Person.prototype.myFrinds5 = function (friends) {
+  let arr = friends.map((el) => {
+    return `${this.name} is friends with ${el}`;
+  });
+  console.log(arr);
+};
+
+const friends = ['Bob', 'Jane', 'Mark'];
+const mike = new Person('Mike').myFrinds5(friends);
+console.log(john);
