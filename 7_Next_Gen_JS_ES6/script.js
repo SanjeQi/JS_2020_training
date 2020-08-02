@@ -1,4 +1,4 @@
-// ///////////////////////////////////////////////// Let and Const
+/////////////////////////////////////////////////// Let and Const
 
 // //ES5
 // var name5 = 'Jane Smith';
@@ -242,57 +242,89 @@
 
 ///////////////////////////////////////////////////////////// Arrays
 
-const boxes = document.querySelectorAll('.box'); // <-- Node List
+// const boxes = document.querySelectorAll('.box'); // <-- Node List
 
-//ES5
+// //ES5
 
-var boxArr5 = Array.prototype.slice.call(boxes); // <-- Array
-console.log(boxArr5);
+// var boxArr5 = Array.prototype.slice.call(boxes); // <-- Array
+// console.log(boxArr5);
 
-boxArr5.forEach(function (el) {
-  el.style.background = 'dodgerblue';
-});
+// boxArr5.forEach(function (el) {
+//   el.style.background = 'dodgerblue';
+// });
 
-//ES6
+// //ES6
 
-const boxArr6 = Array.from(boxes); // <-- Array
+// const boxArr6 = Array.from(boxes); // <-- Array
 
-boxArr6.forEach((el) => {
-  el.style.background = 'dodgerblue';
-});
+// boxArr6.forEach((el) => {
+//   el.style.background = 'dodgerblue';
+// });
 
-//ES5
-for (var i = 0; i < boxArr5.length; i++) {
-  if (boxArr5[i].className === 'box blue') {
-    //continue;
-    break;
-  }
-  boxArr5[i].textContent = 'I changed to blue';
+// //ES5
+// for (var i = 0; i < boxArr5.length; i++) {
+//   if (boxArr5[i].className === 'box blue') {
+//     //continue;
+//     break;
+//   }
+//   boxArr5[i].textContent = 'I changed to blue';
+// }
+
+// //ES6  for-of  loop
+// for (const cur of boxArr6) {
+//   if (cur.className.includes('blue')) {
+//     continue;
+//   }
+//   cur.textContent = 'I changed to blue';
+// }
+
+// ES5;
+// var ages = [12, 17, 8, 21, 14, 11];
+
+// var full = ages.map(function (cur) {
+//   return cur >= 18;
+// });
+// console.log(full);
+
+// var z = full.indexOf(true);
+// console.log(z, ages[z]);
+
+// //ES6
+// var ages = [12, 17, 8, 21, 14, 11];
+
+// const z = ages.findIndex((cur) => {
+//   cur >= 18;
+// });
+// console.log(z);
+
+///////////////////////////////////////Spread Operator
+
+function addFourAges(a, b, c, d) {
+  return a + b + c + d;
 }
 
-//ES6  for-of  loop
-for (const cur of boxArr6) {
-  if (cur.className.includes('blue')) {
-    continue;
-  }
-  cur.textContent = 'I changed to blue';
-}
+var sum1 = addFourAges(18, 30, 12, 21);
+console.log('sum1:', sum1);
 
-ES5;
-var ages = [12, 17, 8, 21, 14, 11];
-
-var full = ages.map(function (cur) {
-  return cur >= 18;
-});
-console.log(full);
-
-var z = full.indexOf(true);
-console.log(z, ages[z]);
+//ES5
+ages = [18, 30, 12, 21];
+var sum2 = addFourAges.apply(null, ages);
+console.log('sum2:', sum2);
 
 //ES6
-var ages = [12, 17, 8, 21, 14, 11];
+const sum3 = addFourAges(...ages);
+console.log('sum3:', sum3);
 
-const z = ages.findIndex((cur) => {
-  cur >= 18;
-});
-console.log(z);
+const familySmith = ['Alex', 'John', 'Jane'];
+const familyMiller = ['Jane', 'Mary', 'Bob'];
+
+const bigFam = [...familyMiller, 'Ann and Chris', ...familySmith];
+console.log(bigFam);
+
+const h = document.querySelector('h1');
+const boxes = document.querySelectorAll('.box');
+
+const all = [h, ...boxes];
+console.log(all);
+
+all.forEach((cur) => (cur.style.color = 'purple'));
