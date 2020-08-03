@@ -297,34 +297,79 @@
 // });
 // console.log(z);
 
-///////////////////////////////////////Spread Operator
+// ///////////////////////////////////////Spread Operator
 
-function addFourAges(a, b, c, d) {
-  return a + b + c + d;
-}
+// function addFourAges(a, b, c, d) {
+//   return a + b + c + d;
+// }
 
-var sum1 = addFourAges(18, 30, 12, 21);
-console.log('sum1:', sum1);
+// var sum1 = addFourAges(18, 30, 12, 21);
+// console.log('sum1:', sum1);
+
+// //ES5
+// ages = [18, 30, 12, 21];
+// var sum2 = addFourAges.apply(null, ages);
+// console.log('sum2:', sum2);
+
+// //ES6
+// const sum3 = addFourAges(...ages);
+// console.log('sum3:', sum3);
+
+// const familySmith = ['Alex', 'John', 'Jane'];
+// const familyMiller = ['Jane', 'Mary', 'Bob'];
+
+// const bigFam = [...familyMiller, 'Ann and Chris', ...familySmith];
+// console.log(bigFam);
+
+// const h = document.querySelector('h1');
+// const boxes = document.querySelectorAll('.box');
+
+// const all = [h, ...boxes];
+// console.log(all);
+
+// all.forEach((cur) => (cur.style.color = 'purple'));
+
+///////////////////////////////////////////////Rest Parameters
 
 //ES5
-ages = [18, 30, 12, 21];
-var sum2 = addFourAges.apply(null, ages);
-console.log('sum2:', sum2);
+function isFullAge5() {
+  // console.log(arguments);
+  var argumentsArr = Array.prototype.slice.call(arguments);
+  argumentsArr.forEach(function (el) {
+    console.log(2020 - el >= 18);
+  });
+}
+
+isFullAge5(1990, 2011, 1992);
+isFullAge5(2001, 2014, 1965, 1990, 2020);
 
 //ES6
-const sum3 = addFourAges(...ages);
-console.log('sum3:', sum3);
 
-const familySmith = ['Alex', 'John', 'Jane'];
-const familyMiller = ['Jane', 'Mary', 'Bob'];
+function isFullAge6(...years) {
+  years.forEach((el) => console.log(2020 - el >= 18));
+}
 
-const bigFam = [...familyMiller, 'Ann and Chris', ...familySmith];
-console.log(bigFam);
+isFullAge6(2001, 2014, 1965, 1990, 2020);
 
-const h = document.querySelector('h1');
-const boxes = document.querySelectorAll('.box');
+////---------------------------------------------
 
-const all = [h, ...boxes];
-console.log(all);
+//ES5
+function isFullAge5(limit) {
+  // console.log(arguments);
+  var argumentsArr = Array.prototype.slice.call(arguments, 1);
+  argumentsArr.forEach(function (el) {
+    console.log(2020 - el >= limit);
+  });
+  console.log(argumentsArr);
+}
 
-all.forEach((cur) => (cur.style.color = 'purple'));
+isFullAge5(1990, 2011, 1992);
+isFullAge5(21, 2001, 2014, 1965, 1990, 2020);
+
+// ES6
+
+function isFullAge6(limit, ...years) {
+  years.forEach((el) => console.log(2020 - el >= limit));
+}
+
+isFullAge6(16, 2001, 2014, 1965, 1990, 2020);
