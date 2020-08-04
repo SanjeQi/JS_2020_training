@@ -417,45 +417,86 @@
 
 ////////////////////////////////////////////////// ES6 MAPS / Hash Map
 
-const question = new Map();
+// const question = new Map();
 
-//set
-question.set('key: question', 'value: What is  yours fav coding language?');
-question.set(1, 'ES5');
-question.set(2, 'ES6');
-question.set(3, 'ES2015');
-question.set(4, 'ES7');
-question.set('correct', 3);
-question.set(true, 'correct answer');
-question.set(false, 'wrong answer.try again');
+// //set
+// question.set('key: question', 'value: What is  yours fav coding language?');
+// question.set(1, 'ES5');
+// question.set(2, 'ES6');
+// question.set(3, 'ES2015');
+// question.set(4, 'ES7');
+// question.set('correct', 3);
+// question.set(true, 'correct answer');
+// question.set(false, 'wrong answer.try again');
 
-//get
-console.log(question.get('key: question'));
-// console.log(question.size);
+// //get
+// console.log(question.get('key: question'));
+// // console.log(question.size);
 
-has;
-if (question.has(4)) {
-  question.delete(4);
-}
+// has;
+// if (question.has(4)) {
+//   question.delete(4);
+// }
 
-//delete / clear
-question.delete(4);
-question.delete(4);
+// //delete / clear
+// question.delete(4);
+// question.delete(4);
 
-question.clear(); //empty map
+// question.clear(); //empty map
 
-looping;
+// looping;
 
-question.forEach((value, key) => {
-  console.log(`This key: ${key} is set to the value: ${value}`);
-});
+// question.forEach((value, key) => {
+//   console.log(`This key: ${key} is set to the value: ${value}`);
+// });
 
-for (let [key, value] of question.entries()) {
-  if (typeof key === 'number') {
-    console.log(`Answer ${key}: ${value}`);
+// for (let [key, value] of question.entries()) {
+//   if (typeof key === 'number') {
+//     console.log(`Answer ${key}: ${value}`);
+//   }
+// }
+
+// const ans = parseInt(prompt('Write the correct answer'));
+
+// console.log(question.get(ans === question.get('correct')));
+
+/////////////////////////////////////////////////////////////Classes
+
+//ES5
+
+var Person5 = function (name, yearOfBirth, job) {
+  this.name = name;
+  this.yearOfBirth = yearOfBirth;
+  this.job = job;
+};
+
+Person5.prototype.calculatAge = function () {
+  var age = new Date().getFullYear() - this.yearOfBirth;
+  console.log(age);
+};
+
+var john5 = new Person5('John', 1982, 'Painter');
+console.log(john5, john5.calculatAge());
+
+// ES6
+
+class Person6 {
+  constructor(name, yearOfBirth, job) {
+    this.name = name;
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+  }
+  calculateAge() {
+    const age = new Date().getFullYear() - this.yearOfBirth;
+    console.log(age);
+  }
+
+  static greeting() {
+    console.log('Hey there');
   }
 }
 
-const ans = parseInt(prompt('Write the correct answer'));
+const john6 = new Person6('Johhny', 1970, 'teacher');
+console.log(john6, john6.calculateAge());
 
-console.log(question.get(ans === question.get('correct')));
+Person6.greeting();
