@@ -376,41 +376,86 @@
 
 /////////////////////////////////////////////////////Default Paramenters
 
-//ES5
+// //ES5
 
-function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
-  lastName === undefined ? (lastName = 'Smih') : lastName;
-  nationality === undefined ? (nationality = 'german') : nationality;
+// function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
+//   lastName === undefined ? (lastName = 'Smih') : lastName;
+//   nationality === undefined ? (nationality = 'german') : nationality;
 
-  this.firstName = firstName;
-  this.lastName = lastName;
-  this.yearOfBirth = yearOfBirth;
-  this.nationality = nationality;
+//   this.firstName = firstName;
+//   this.lastName = lastName;
+//   this.yearOfBirth = yearOfBirth;
+//   this.nationality = nationality;
+// }
+
+// var john = new SmithPerson('John', 1990);
+// var emily = new SmithPerson('Emily', 1983, 'Diaz', 'spanish');
+// console.log(john);
+// console.log(emily);
+
+// //ES6
+
+// function SmithPerson(
+//   firstName,
+//   yearOfBirth,
+//   lastName = 'smith',
+//   nationality = 'american'
+// ) {
+//   lastName === undefined ? (lastName = 'Smih') : lastName;
+//   nationality === undefined ? (nationality = 'german') : nationality;
+
+//   this.firstName = firstName;
+//   this.lastName = lastName;
+//   this.yearOfBirth = yearOfBirth;
+//   this.nationality = nationality;
+// }
+
+// var john1 = new SmithPerson('Bob', 1990);
+// var emily2 = new SmithPerson('Ana', 1983, 'Xu', 'chinese');
+// console.log(john1);
+// console.log(emily2);
+
+////////////////////////////////////////////////// ES6 MAPS / Hash Map
+
+const question = new Map();
+
+//set
+question.set('key: question', 'value: What is  yours fav coding language?');
+question.set(1, 'ES5');
+question.set(2, 'ES6');
+question.set(3, 'ES2015');
+question.set(4, 'ES7');
+question.set('correct', 3);
+question.set(true, 'correct answer');
+question.set(false, 'wrong answer.try again');
+
+//get
+console.log(question.get('key: question'));
+// console.log(question.size);
+
+has;
+if (question.has(4)) {
+  question.delete(4);
 }
 
-var john = new SmithPerson('John', 1990);
-var emily = new SmithPerson('Emily', 1983, 'Diaz', 'spanish');
-console.log(john);
-console.log(emily);
+//delete / clear
+question.delete(4);
+question.delete(4);
 
-//ES6
+question.clear(); //empty map
 
-function SmithPerson(
-  firstName,
-  yearOfBirth,
-  lastName = 'smith',
-  nationality = 'american'
-) {
-  lastName === undefined ? (lastName = 'Smih') : lastName;
-  nationality === undefined ? (nationality = 'german') : nationality;
+looping;
 
-  this.firstName = firstName;
-  this.lastName = lastName;
-  this.yearOfBirth = yearOfBirth;
-  this.nationality = nationality;
+question.forEach((value, key) => {
+  console.log(`This key: ${key} is set to the value: ${value}`);
+});
+
+for (let [key, value] of question.entries()) {
+  if (typeof key === 'number') {
+    console.log(`Answer ${key}: ${value}`);
+  }
 }
 
-var john1 = new SmithPerson('Bob', 1990);
-var emily2 = new SmithPerson('Ana', 1983, 'Xu', 'chinese');
-console.log(john1);
-console.log(emily2);
+const ans = parseInt(prompt('Write the correct answer'));
+
+console.log(question.get(ans === question.get('correct')));
