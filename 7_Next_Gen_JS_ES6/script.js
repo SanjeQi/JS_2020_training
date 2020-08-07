@@ -112,7 +112,7 @@
 // let ages6 = years.map((cur) => 2020 - cur);
 // console.log(ages6);
 
-// const ages7 = years.map((el, indx) => `Age element ${indx}: ${2020 - el}`);
+// const ages = years.map((el, indx) => `Age element ${indx}: ${2020 - el}`);
 // console.log(ages7);
 
 // const ages8 = years.map((el, indx) => {
@@ -604,105 +604,71 @@ Suppose that you're working in a small town administration, and you're in charge
 It's a very small town, so right now there are only 3 parks and 4 streets. All parks and streets have a name and a build year.
 At an end-of-year meeting, your boss wants a final report with the following:
 1. Tree density of each park in the town (forumla: number of trees/park area)
-2. Average age of each town's park (forumla: sum of all ages/number of parks)
+2. Average age all parks (forumla: sum of all ages/number of parks)
 3. The name of the park that has more than 1000 trees
 4. Total and average length of the town's streets
 5. Size classification of all streets: tiny/small/normal/big/huge. If the size is unknown, the default is normal
 All the report data should be printed to the console.
 HINT: Use some of the ES6 features: classes, subclasses, template strings, default parameters, maps, arrow functions, destructuring, etc.
-*/ 6;
-var Element = function Element(name, buildYear) {
-  _classCallCheck(this, Element);
+*/
 
-  this.name = name;
-  this.buildYear = buildYear;
-};
+/*
+ Parks (name, buildYear, parkArea, numTrees)
+     * 3 parks 
+    Need in report:
+    1.Tree density of each park in the town (forumla: number of trees/park area
+    2.Average age all parks (forumla: sum of all ages/number of parks
+    3.The name of the park that has more than 1000 trees
 
-var Park = (function (_Element) {
-  _inherits(Park, _Element);
+ Streets (name, buildYear, strLength, size)
+  * 4 streets
+  
+  1. treeDensity - formula numTrees / parkArea
+  
+*/
 
-  function Park(name, buildYear, area, numTrees) {
-    _classCallCheck(this, Park);
+class Town {
+  constructor(name, buildYear) {
+    this.name = name;
+    this.buildYear = buildYear;
+  }
+}
 
-    var _this = _possibleConstructorReturn(
-      this,
-      (Park.__proto__ || Object.getPrototypeOf(Park)).call(
-        this,
-        name,
-        buildYear
-      )
+class Park extends Town {
+  constructor(name, buildYear, parkArea, numTrees) {
+    super(name, buildYear);
+    this.parkArea = parkArea;
+    this.numTrees = numTrees;
+  }
+  treeDensity() {
+    const density = (this.numTrees / this.parkArea).toFixed(2);
+    console.log(
+      `The park: "${this.name}" has a tree density of ${density}/sqr km.`
     );
+  }
+}
 
-    _this.area = area; //km2
-    _this.numTrees = numTrees;
-    return _this;
+class Street extends Town {
+  constructor(name, buildYear, strLength, size = 3) {
+    super(name, buildYear);
+    this.strLength = this.strLength;
+    this.size = size; // km2
   }
 
-  _createClass(Park, [
-    {
-      key: 'treeDensity',
-      value: function treeDensity() {
-        var density = this.numTrees / this.area;
-        console.log(
-          this.name +
-            ' has a tree density of ' +
-            density +
-            ' trees per square km.'
-        );
-      },
-    },
-  ]);
-
-  return Park;
-})(Element);
-
-var Street = (function (_Element2) {
-  _inherits(Street, _Element2);
-
-  function Street(name, buildYear, length) {
-    var size =
-      arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 3;
-
-    _classCallCheck(this, Street);
-
-    var _this2 = _possibleConstructorReturn(
-      this,
-      (Street.__proto__ || Object.getPrototypeOf(Street)).call(
-        this,
-        name,
-        buildYear
-      )
+  classifyStreet() {
+    const classification = new Map();
+    classification.set(1, tiny);
+    classification.set(2, small);
+    classification.set(3, normal);
+    classification.set(4, big);
+    classification.set(5, huge);
+    console.log(
+      `The street${this.name}, was built in ${
+        this.buildYear
+      }, is a ${classification.get(this.size)} street`
     );
-
-    _this2.length = length;
-    _this2.size = size;
-    return _this2;
   }
-
-  _createClass(Street, [
-    {
-      key: 'classifyStreet',
-      value: function classifyStreet() {
-        var classification = new Map();
-        classification.set(1, 'tiny');
-        classification.set(2, 'small');
-        classification.set(3, 'normal');
-        classification.set(4, 'big');
-        classification.set(5, 'huge');
-        console.log(
-          this.name +
-            ', build in ' +
-            this.buildYear +
-            ', is a ' +
-            classification.get(this.size) +
-            ' street.'
-        );
-      },
-    },
-  ]);
-
-  return Street;
-})(Element);
+}
 
 var allParks = [
   new Park('Green Park', 1987, 0.2, 215),
@@ -718,75 +684,35 @@ var allStreets = [
 ];
 
 function calc(arr) {
-  var sum = arr.reduce(function (prev, cur, index) {
-    return prev + cur;
-  }, 0);
-
+  const sum = arr.reduce((acc, char) => acc + char, 0);
   return [sum, sum / arr.length];
 }
 
-function reportParks(p) {
-  console.log('-----PARKS REPORT-----');
+function reportPark(p) {
+  console.log('---- Parks Report----');
 
-  // Density
-  p.forEach(function (el) {
-    return el.treeDensity();
+  // 1.Tree density of each park in the town (forumla: number of trees/park area
+  p.forEach((element) => {
+    element.treeDensity();
   });
 
-  // Average age
-  var ages = p.map(function (el) {
-    return new Date().getFullYear() - el.buildYear;
-  });
+  // 2.Average age all parks (forumla: sum of all ages/number of parks
+  const ages = p.map((el) => new Date().getFullYear() - el.buildYear);
+  const [totalAge, avgAge] = calc(ages);
+  console.log(`Our ${p.length} parks have an average of ${avgAge}`);
 
-  var _calc = calc(ages),
-    _calc2 = _slicedToArray(_calc, 2),
-    totalAge = _calc2[0],
-    avgAge = _calc2[1];
-
-  console.log(
-    'Our ' + p.length + ' parks have an average of ' + avgAge + ' years.'
-  );
-
-  // Which park has more than 1000 trees
-  var i = p
-    .map(function (el) {
-      return el.numTrees;
-    })
-    .findIndex(function (el) {
-      return el >= 1000;
-    });
-  console.log(p[i].name + ' has more than 1000 trees.');
-}
-
-function reportStreets(s) {
-  console.log('-----STREETS REPORT-----');
-
-  //Total and average length of the town's streets
-
-  var _calc3 = calc(
-      s.map(function (el) {
-        return el.length;
-      })
-    ),
-    _calc4 = _slicedToArray(_calc3, 2),
-    totalLength = _calc4[0],
-    avgLength = _calc4[1];
-
-  console.log(
-    'Our ' +
-      s.length +
-      ' streets have a total length of ' +
-      totalLength +
-      ' km, with an average of ' +
-      avgLength +
-      ' km.'
-  );
-
-  // CLassify sizes
-  s.forEach(function (el) {
-    return el.classifyStreet();
+  // 3.The name of the park that has more than 1000 trees
+  const nameBigPark = p.forEach((el) => {
+    if (el.numTrees >= 1000) {
+      console.log(`The park that has over 1000 trees is: ${el.name}`);
+    }
   });
 }
+function reportStreet(s) {
+  console.log('---- Streets Report----');
+}
 
-reportParks(allParks);
-reportStreets(allStreets);
+reportPark(allParks);
+reportStreet(allStreets);
+
+console.log(allStreets);
