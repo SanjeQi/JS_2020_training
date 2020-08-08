@@ -651,19 +651,19 @@ class Park extends Town {
 class Street extends Town {
   constructor(name, buildYear, strLength, size = 3) {
     super(name, buildYear);
-    this.strLength = this.strLength;
+    this.strLength = strLength;
     this.size = size; // km2
   }
 
   classifyStreet() {
     const classification = new Map();
-    classification.set(1, tiny);
-    classification.set(2, small);
-    classification.set(3, normal);
-    classification.set(4, big);
-    classification.set(5, huge);
+    classification.set(1, 'tiny');
+    classification.set(2, 'small');
+    classification.set(3, 'norma');
+    classification.set(4, 'big');
+    classification.set(5, 'huge');
     console.log(
-      `The street${this.name}, was built in ${
+      `The street ${this.name}, was built in ${
         this.buildYear
       }, is a ${classification.get(this.size)} street`
     );
@@ -679,12 +679,12 @@ var allParks = [
 var allStreets = [
   new Street('Ocean Avenue', 1999, 1.1, 4),
   new Street('Evergreen Street', 2008, 2.7, 2),
-  new Street('4th Street', 2015, 0.8),
+  new Street('4th Street', 2015, 0.8, 4),
   new Street('Sunset Boulevard', 1982, 2.5, 5),
 ];
 
 function calc(arr) {
-  const sum = arr.reduce((acc, char) => acc + char, 0);
+  const sum = arr.reduce((acc, char) => acc + char, 0).toFixed(2);
   return [sum, sum / arr.length];
 }
 
@@ -710,6 +710,17 @@ function reportPark(p) {
 }
 function reportStreet(s) {
   console.log('---- Streets Report----');
+
+  //   4. Total and average length of the town's streets
+  const streeLength = s.map((el) => el.strLength);
+  const [strLengthTotal, strLengthAvr] = calc(streeLength);
+
+  console.log(
+    `Total Streets Length is: ${strLengthTotal} km, and the Average Street Length is: ${strLengthAvr} km.`
+  );
+
+  //   Clasify Stree by size
+  s.forEach((el) => el.classifyStreet());
 }
 
 reportPark(allParks);
