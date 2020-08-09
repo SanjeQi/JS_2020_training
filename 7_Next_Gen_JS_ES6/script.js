@@ -627,45 +627,45 @@ HINT: Use some of the ES6 features: classes, subclasses, template strings, defau
   
 */
 
-class Town {
+class Element {
   constructor(name, buildYear) {
     this.name = name;
     this.buildYear = buildYear;
   }
 }
 
-class Park extends Town {
+class Park extends Element {
   constructor(name, buildYear, parkArea, numTrees) {
     super(name, buildYear);
     this.parkArea = parkArea;
     this.numTrees = numTrees;
   }
-  treeDensity() {
-    const density = (this.numTrees / this.parkArea).toFixed(2);
+  treeDensityCalc() {
+    const treeDensity = (this.numTrees / this.parkArea).toFixed(2);
     console.log(
-      `The park: "${this.name}" has a tree density of ${density}/sqr km.`
+      `In the Park: ${this.name} the tree density is ${treeDensity} per square km`
     );
   }
 }
 
-class Street extends Town {
+class Street extends Element {
   constructor(name, buildYear, strLength, size = 3) {
     super(name, buildYear);
     this.strLength = strLength;
-    this.size = size; // km2
+    this.size = size;
   }
-
-  classifyStreet() {
+  streetClassification() {
     const classification = new Map();
+    //tiny/small/normal/big/huge
     classification.set(1, 'tiny');
     classification.set(2, 'small');
-    classification.set(3, 'norma');
+    classification.set(3, 'normal');
     classification.set(4, 'big');
     classification.set(5, 'huge');
     console.log(
-      `The street ${this.name}, was built in ${
+      `The ${this.name} Street was built in ${
         this.buildYear
-      }, is a ${classification.get(this.size)} street`
+      } and we can say is ${classification.get(this.size)}`
     );
   }
 }
@@ -677,53 +677,48 @@ var allParks = [
 ];
 
 var allStreets = [
-  new Street('Ocean Avenue', 1999, 1.1, 4),
-  new Street('Evergreen Street', 2008, 2.7, 2),
-  new Street('4th Street', 2015, 0.8, 4),
+  new Street('Ocean Pier', 1999, 1.1, 4),
+  new Street('Evergreen', 2008, 2.7, 2),
+  new Street('Broadway ', 2015, 0.8, 4),
   new Street('Sunset Boulevard', 1982, 2.5, 5),
 ];
 
-function calc(arr) {
-  const sum = arr.reduce((acc, char) => acc + char, 0).toFixed(2);
-  return [sum, sum / arr.length];
-}
-
-function reportPark(p) {
-  console.log('---- Parks Report----');
-
-  // 1.Tree density of each park in the town (forumla: number of trees/park area
-  p.forEach((element) => {
-    element.treeDensity();
-  });
-
-  // 2.Average age all parks (forumla: sum of all ages/number of parks
-  const ages = p.map((el) => new Date().getFullYear() - el.buildYear);
-  const [totalAge, avgAge] = calc(ages);
-  console.log(`Our ${p.length} parks have an average of ${avgAge}`);
-
-  // 3.The name of the park that has more than 1000 trees
-  const nameBigPark = p.forEach((el) => {
-    if (el.numTrees >= 1000) {
-      console.log(`The park that has over 1000 trees is: ${el.name}`);
-    }
-  });
-}
-function reportStreet(s) {
-  console.log('---- Streets Report----');
-
-  //   4. Total and average length of the town's streets
-  const streeLength = s.map((el) => el.strLength);
-  const [strLengthTotal, strLengthAvr] = calc(streeLength);
-
+function streetReport(s) {
+  console.log('--- Street Report ---');
+  // 4. Total and average length of the town's streets
+  const streetLength = s.map((el) => el.strLength);
+  const [totalSteetsLength, averageStreetLength] = calc(streetLength);
   console.log(
-    `Total Streets Length is: ${strLengthTotal} km, and the Average Street Length is: ${strLengthAvr} km.`
+    `The average streets legth is: ${averageStreetLength.toFixed(
+      2
+    )} km and Total streets length is ${totalSteetsLength.toFixed(2)} km`
   );
-
-  //   Clasify Stree by size
-  s.forEach((el) => el.classifyStreet());
+  // 5. Size classification of all streets: tiny/small/normal/big/huge. If the size is unknown, the default is normal
+  s.forEach((el) => el.streetClassification());
 }
 
-reportPark(allParks);
-reportStreet(allStreets);
+function calc(array) {
+  const sum = array.reduce((acc, char) => acc + char);
+  return [sum, sum / array.length];
+}
 
+function parkReport(p) {
+  console.log('--- Park Report ---');
+  //   1. Tree density of each park in the town (forumla: number of trees/park area)
+  p.forEach((el) => {
+    el.treeDensityCalc();
+  });
+  // 2. Average age all parks (forumla: sum of all ages/number of parks)
+  const ages = p.map((el) => new Date().getFullYear() - el.buildYear);
+  const [totalParkAge, averageParkAge] = calc(ages);
+  console.log(`Average age of the parks is ${averageParkAge.toFixed(2)}`);
+
+  // 3. The name of the park that has more than 1000 trees
+  const index = p.map((el) => el.numTrees).findIndex((el) => el >= 1000);
+  console.log(`${p[index].name} has more than 1000 trees`);
+}
+
+streetReport(allStreets);
+parkReport(allParks);
+console.log(allParks);
 console.log(allStreets);
