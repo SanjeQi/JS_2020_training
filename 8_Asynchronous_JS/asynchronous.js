@@ -93,21 +93,44 @@
 // }
 // getRecipeAW().then((res) => console.log(res));
 
-//------------------------------------------Making Ajax calls with fetch and promises
-function getWeather(woeid) {
-  fetch(
+// //------------------------------------------Making Ajax calls with fetch and promises
+// function getWeather(woeid) {
+//   fetch(
+//     `https://crossorigin.me/https://www.metaweather.com/api/location/${woeid}/`
+//   )
+//     .then((res) => {
+//       return res.json();
+//     })
+//     .then((data) => {
+//       //console.log(data);
+//       const today = data.consolidated_weather[0];
+//       console.log(
+//         `Temeperatures in ${data.title} stay between ${today.min_temp} and ${today.max_temp}.`
+//       );
+//     })
+//     .catch((err) => console.log(err));
+// }
+// getWeather(2487956);
+
+// -------------------------------------------------- Making AJAX calls with Fetch and Async/Await
+
+async function getWeatherAW(woeid) {
+  const res = await fetch(
     `https://crossorigin.me/https://www.metaweather.com/api/location/${woeid}/`
-  )
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      //console.log(data);
-      const today = data.consolidated_weather[0];
-      console.log(
-        `Temeperatures in ${data.title} stay between ${today.min_temp} and ${today.max_temp}.`
-      );
-    })
-    .catch((err) => console.log(err));
+  );
+  try {
+    const data = await res.json();
+    const today = data.consolidated_weather[0];
+    console.log(
+      `Temeperatures in ${data.title} stay between ${today.min_temp} and ${today.max_temp}.`
+    );
+  } catch (err) {
+    alert(err);
+  }
+  return data;
 }
-getWeather(2487956);
+let dataLondon;
+getWeatherAW(2487956).then((data) => {
+  dataLondon = data;
+  console.log(dataLondon);
+});
