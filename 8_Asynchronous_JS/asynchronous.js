@@ -62,19 +62,33 @@ const getRecipe2 = (cook) => {
   });
 };
 
-// Consume the promise
-getIDs
-  .then((IDs) => {
-    console.log(IDs);
-    return getRecipe(IDs[2]);
-  })
-  .then((recipe) => {
-    console.log(recipe);
-    return getRecipe2('Bono');
-  })
-  .then((recipe2) => {
-    console.log(recipe2);
-  })
-  .catch((error) => {
-    console.log('Something went wrong');
-  });
+// // Consume the promise
+// getIDs
+//   .then((IDs) => {
+//     console.log(IDs);
+//     return getRecipe(IDs[2]);
+//   })
+//   .then((recipe) => {
+//     console.log(recipe);
+//     return getRecipe2('Bono');
+//   })
+//   .then((recipe2) => {
+//     console.log(recipe2);
+//   })
+//   .catch((error) => {
+//     console.log('Something went wrong');
+//   });
+
+// -------------------------------------Consume promoses: Async/Await
+
+async function getRecipeAW() {
+  const IDs = await getIDs;
+  console.log(IDs);
+  const recipe = await getRecipe(IDs[2]);
+  console.log(recipe);
+  const recipe2 = await getRecipe2('Lae Porcu');
+  console.log(recipe2);
+
+  return recipe2;
+}
+getRecipeAW().then((res) => console.log(res));
