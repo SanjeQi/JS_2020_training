@@ -29,14 +29,19 @@ const controlSearch = async () => {
     // * 3.3 Add loader spinner before search results are loaded
     renderLoader(elements.searchRes);
 
-    // 4. Search for recipes
-    await state.search.getResults();
+    try {
+      // 4. Search for recipes
+      await state.search.getResults();
 
-    // 5.Render results on UI later/ now log to console
-    // * 5.1 Clear the spinning loader
-    clearLoader();
-    // * 5.2 Search for recipes
-    searchView.renderResults(state.search.result);
+      // 5.Render results on UI later/ now log to console
+      // * 5.1 Clear the spinning loader
+      clearLoader();
+      // * 5.2 Search for recipes
+      searchView.renderResults(state.search.result);
+    } catch (err) {
+      clearLoader();
+      alert('Something went wrong with the server response');
+    }
   }
 };
 
@@ -55,7 +60,7 @@ elements.searchResPages.addEventListener('click', (e) => {
   }
 });
 
-// // ****************************************** Recipe Controller **********************************
+// // *************************************************** Recipe Controller **********************************
 const controlRecipe = async () => {
   // Get ID from URL
   const id = window.location.hash.replace('#', '');
@@ -65,15 +70,24 @@ const controlRecipe = async () => {
     // Prepare the UI for changes
     // Create new recipe object
     state.recipe = new Recipe(id);
-    // Get recipe data
-    await state.recipe.getRecipe();
-    // Calulate servings and time
-    state.recipe.calcCookTime();
-    state.recipe.calcServings();
-    // Render recipe to UI
-    console.log(state.recipe);
+
+    try {
+      // Get recipe data
+      await state.recipe.getRecipe();
+      // Calulate servings and time
+      state.recipe.calcCookTime();
+      state.recipe.calcServings();
+      // Render recipe to UI
+      console.log(state.recipe);
+    } catch (err) {
+      alert('Something went wrong getting the data from server');
+    }
   }
 };
 
-window.addEventListener('hashchange', controlRecipe);
-window.addEventListener('load', controlRecipe);
+//Add same event listeners to different events
+['hashchange', 'load'].forEach((event) =>
+  window.addEventListener(event, controlRecipe)
+);
+// window.addEventListener('hashchange', controlRecipe);
+// window.addEventListener('load', controlRecipe);
