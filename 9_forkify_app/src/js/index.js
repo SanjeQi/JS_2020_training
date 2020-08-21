@@ -14,8 +14,7 @@ const state = {};
 // // **************************************************** Search Controller *********************
 const controlSearch = async () => {
   // 1.Get a queryWord from the view
-  const queryWord = searchView.getInput(); // TODO
-  console.log(queryWord);
+  const queryWord = searchView.getInput();
 
   if (queryWord) {
     // 2.New search object and add it to this.state.
@@ -72,8 +71,9 @@ const controlRecipe = async () => {
     state.recipe = new Recipe(id);
 
     try {
-      // Get recipe data
+      // Get recipe data and parse ingredients
       await state.recipe.getRecipe();
+      state.recipe.parseIngredients();
       // Calulate servings and time
       state.recipe.calcCookTime();
       state.recipe.calcServings();
