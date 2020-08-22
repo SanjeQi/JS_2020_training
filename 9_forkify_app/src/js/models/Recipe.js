@@ -9,7 +9,7 @@ export default class Recipe {
       )
         .then((response) => response.json())
         .then((data) => data);
-      this.result = res.recipe;
+
       this.title = res.recipe.title;
       this.author = res.recipe.publisher;
       this.img = res.recipe.image_url;
@@ -19,7 +19,7 @@ export default class Recipe {
       alert(error);
     }
   }
-  calcCookTime() {
+  calcTime() {
     // Assuming that we need 15 min per each 3 ingredients
     const numIngr = this.ingredients.length;
     const periods = Math.ceil(numIngr / 3);
