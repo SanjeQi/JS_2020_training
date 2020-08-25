@@ -71,6 +71,12 @@ const controlRecipe = async () => {
     recipeView.clearRecipe();
     renderLoader(elements.recipe);
 
+    // Highlight selected search item
+
+    if (state.search) {
+      searchView.highlightSelected(id);
+    }
+
     // Create new recipe object
     state.recipe = new Recipe(id);
 
@@ -80,14 +86,14 @@ const controlRecipe = async () => {
       state.recipe.parseIngredients();
 
       // Calulate servings and time
-      state.recipe.calcCookTime();
+      state.recipe.calcTime();
       state.recipe.calcServings();
 
       // Render recipe to UI
       clearLoader();
       recipeView.renderRecipe(state.recipe);
     } catch (err) {
-      alert('Something went wrong getting the data from server');
+      alert(err);
     }
   }
 };
