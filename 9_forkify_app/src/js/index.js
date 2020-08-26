@@ -137,3 +137,22 @@ elements.shopping.addEventListener('click', (e) => {
     state.list.updateCount(id, val);
   }
 });
+
+// *************************** Handling recipe button clicks - increase and decrease servings
+elements.recipe.addEventListener('click', (e) => {
+  //if target matches the button-decrease or any childs of btn-decrease
+  if (e.target.matches('.btn-decrease, .btn-decrease *')) {
+    // Decrease button is clicked
+    if (state.recipe.servings > 1) {
+      state.recipe.updateServings('dec');
+      recipeView.updateServingsIngredients(state.recipe);
+    }
+  } else if (e.target.matches('.btn-increase, .btn-increase *')) {
+    // Increase button is clicked
+
+    state.recipe.updateServings('inc');
+    recipeView.updateServingsIngredients(state.recipe);
+  } else if (e.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
+    controlList();
+  }
+});
