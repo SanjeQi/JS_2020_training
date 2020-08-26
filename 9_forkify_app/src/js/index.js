@@ -4,6 +4,7 @@ import List from './models/List';
 import { elements, renderLoader, clearLoader } from './views/base';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
+import * as listView from './views/listView';
 
 // **** Global State of the App ****
 // * Search object
@@ -12,6 +13,7 @@ import * as recipeView from './views/recipeView';
 // * Liked recipes
 
 const state = {};
+window.state = state;
 
 // // **************************************************** Search Controller *********************
 const controlSearch = async () => {
@@ -106,22 +108,32 @@ const controlRecipe = async () => {
 // window.addEventListener('hashchange', controlRecipe);
 // window.addEventListener('load', controlRecipe);
 
-//Handling recipe button clicks - increase and decrease servings
-elements.recipe.addEventListener('click', (e) => {
-  //if target matches the button-decrease or any childs of btn-decrease
-  if (e.target.matches('.btn-decrease, .btn-decrease *')) {
-    // Decrease button is clicked
-    if (state.recipe.servings > 1) {
-      state.recipe.updateServings('dec');
-      recipeView.updateServingsIngredients(state.recipe);
-    }
-  } else if (e.target.matches('.btn-increase, .btn-increase *')) {
-    // Increase button is clicked
-    state.recipe.updateServings('inc');
-    recipeView.updateServingsIngredients(state.recipe);
-  }
-});
-
 // // *************************************************** List Controller **********************************
 
-window.l = new List();
+const controlList = () => {
+  // Create a new list if there is none yet
+  if (!state.list) state.list = new List();
+
+  // Add each ingredient to the list and UI
+  state.recipe.ingredients.forEach((el) => {
+    const item = state.list.addItem(el.count, el.unit, el.ingredient);
+    listView.renderItem(item);
+  });
+};
+
+// Handle delete and update list item events
+elements.shopping.addEventListener('click', (e) => {
+  const id = e.target.closest('.shopping__item').dataset.itemid;
+
+  // Handle the delete button
+  if (e.target.matches('.shopping__delete, .shopping__delete *')) {
+    // Delete from state
+    state.list.deleteItem(id);
+    // Delete from UI
+    listView.deleteItem(id);
+    //Update ingredient amount value- count handle
+  } else if (e.target.matches('.shopping__count-value')) {
+    const val = parseFloat(e.target.value);
+    state.list.updateCount(id, val);
+  }
+});
