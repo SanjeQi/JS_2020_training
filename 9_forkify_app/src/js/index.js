@@ -142,11 +142,6 @@ elements.shopping.addEventListener('click', (e) => {
 });
 
 // // *************************************************** Like Controller **********************************
-//*****Testing */
-state.likes = new Likes();
-likesView.toggleLikeMenu(state.likes.getNumLikes());
-
-//////////////
 
 const controlLike = () => {
   if (!state.likes) state.likes = new Likes();
@@ -179,9 +174,22 @@ const controlLike = () => {
   }
   likesView.toggleLikeMenu(state.likes.getNumLikes());
 };
+
+///********** Restore liked recipes on page load *************/
+window.addEventListener('load', () => {
+  state.likes = new Likes();
+
+  //Restore likes from storage
+  state.likes.readStorage();
+  //Toggle like menu button
+  likesView.toggleLikeMenu(state.likes.getNumLikes());
+  // Render the existing likes
+  state.likes.likes.forEach((like) => likesView.renderLike(like));
+});
+
 // *************************** Handling recipe button clicks - increase and decrease servings
 elements.recipe.addEventListener('click', (e) => {
-  //if target matches the button-decrease or any childs of btn-decrease
+  //if target matches the button-decrease or any child of btn-decrease
   if (e.target.matches('.btn-decrease, .btn-decrease *')) {
     // Decrease button is clicked
     if (state.recipe.servings > 1) {
