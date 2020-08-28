@@ -15,8 +15,6 @@ import * as likesView from './views/likesView';
 // * Liked recipes
 
 const state = {};
-window.state = state;
-
 // // **************************************************** Search Controller *********************
 const controlSearch = async () => {
   // 1.Get a queryWord from the view
@@ -61,7 +59,6 @@ elements.searchResPages.addEventListener('click', (e) => {
     const goToPage = parseInt(btn.dataset.goto);
     searchView.clearResults();
     searchView.renderResults(state.search.result, goToPage);
-    console.log(goToPage);
   }
 });
 
@@ -69,7 +66,6 @@ elements.searchResPages.addEventListener('click', (e) => {
 const controlRecipe = async () => {
   // Get ID from URL
   const id = window.location.hash.replace('#', '');
-  console.log(id);
 
   if (id) {
     // Prepare the UI for changes
@@ -77,7 +73,6 @@ const controlRecipe = async () => {
     renderLoader(elements.recipe);
 
     // Highlight selected search item
-
     if (state.search) {
       searchView.highlightSelected(id);
     }
@@ -90,7 +85,7 @@ const controlRecipe = async () => {
       await state.recipe.getRecipe();
       state.recipe.parseIngredients();
 
-      // Calulate servings and time
+      // Calculate servings and time
       state.recipe.calcTime();
       state.recipe.calcServings();
 
@@ -99,7 +94,7 @@ const controlRecipe = async () => {
       recipeView.renderRecipe(state.recipe, state.likes.isLiked(id));
     } catch (err) {
       console.log(err);
-      alert(err);
+      alert('Something went wrong. Err message displayed in console ');
     }
   }
 };
