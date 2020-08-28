@@ -1,5 +1,6 @@
 import { elements } from './base';
 import { Fraction } from 'fractional';
+import Likes from '../models/Likes';
 
 export const clearRecipe = () => {
   elements.recipe.innerHTML = '';
@@ -85,15 +86,14 @@ export const renderRecipe = (recipe, isLiked) => {
         </div>
         <button class="recipe__love">
             <svg class="header__likes">
-            <use href="img/icons.svg#icon-heart${
-              isLiked ? '' : '-outlined'
-            }"></use>
+              <use href="img/icons.svg#icon-heart${isLiked ? '' : '-outlined'}">
+              </use>
             </svg>
         </button>
         </div>
         <div class="recipe__ingredients">
         <ul class="recipe__ingredient-list">
-            ${recipe.ingredients.map((el) => createIngredient(el)).join(' ')}
+            ${recipe.ingredients.map((el) => createIngredient(el)).join('')}
         </ul>
         <button class="btn-small recipe__btn recipe__btn--add" >
             <svg class="search__icon">
