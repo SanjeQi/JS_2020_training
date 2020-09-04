@@ -53,5 +53,49 @@
     "screen": "15-inch, Full HD",
     "price": "1499",
     "description": "While it may not have the best keyboard in the world, the Samsung Notebook 9 is still one of the best laptops you can buy in 2018. Packed with more horsepower than some MacBook Pros,but at a much lower price, Samsung has crafted a laptop that has just as much substance as it does style. Plus, on top of its killer specs, it’s lightweight and thin, making this one of the most portable 15-inch laptops you can buy today."
+  },
+  {
+    "id": "5",
+    "productName": "Dell XPS 15 (2020)",
+    "image": "dell-xps-15.jpg",
+    "cpu": "Intel Core i5 – i7 10th-gen",
+    "ram": "8GB – 64GB",
+    "storage": "256GB – 1TB SSD",
+    "screen": "15.6 FHD+ (1920 x 1200) or IPS UHD+ (3840 x 2400) ",
+    "price": "1599",
+    "description": "Dell's 2020 update to its 15-inch flagship ticks pretty much every box when it comes to what we want from a laptop. The end result is that the Dell XPS 15 (2020) is about as close to perfect as a laptop can get and one of the best Dell laptops to date; there's really not a lot we can fault it for. It's got some of the latest, and best, mobile tech from Intel, and can even be configured with a discrete GPU, making it adept at image and video editing, and even a spot of light gaming."
+  },
+  {
+    "id": "6",
+    "productName": "HP Spectre x360 (2020)",
+    "image": "hp-spectre-x360.jpg",
+    "cpu": "Intel Core i5 – i7 10th-gen",
+    "ram": "8GB – 64GB",
+    "storage": "256GB – 1TB SSD",
+    "screen": "13.3 FHD IPS BrightView or 13.3 diagonal 4K (3840 x 2160)",
+    "price": "1199",
+    "description": "The HP Spectre x360 2-in-1 laptop has had a big refresh for 2020, and the boost in specs, with 10th-generation Intel Core processors and Intel Iris Plus graphics, along with the impeccable 2-in-1 design and pristine gem-cut chassis, means that the new version has a well-deserved spot towards the top of our best laptops list."
+  },
+  {
+    "id": "7",
+    "productName": "LG Gram 17",
+    "image": "lg-gram-17.jpg",
+    "cpu": "Intel Core i7-1065G7",
+    "ram": "16GB",
+    "storage": "2 x 512GB SSD",
+    "screen": "17-inch 1600p (2,560 x 1,600) ",
+    "price": "1233",
+    "description": "Usually when you're going for a 17-inch laptop, you have to give up any notion of portability. Typically laptops of this size are these gigantic bulky things, packed with the most powerful components to attract creative professionals. However, while the LG Gram 17 abandons the full-fat H-series processors for Intel Ice Lake Ultrabook-class chips, it makes up for that by being a 17-inch laptop that's as light as a 13-inch one."
+  },
+  {
+    "id": "8",
+    "productName": "Acer Swift 3",
+    "image": "acer.jpg",
+    "cpu": "up to Intel Core i7-8565U",
+    "ram": "4GB-8GB",
+    "storage": "128GB – 1TB HDD",
+    "screen": "14in FHD(1920 x 1080) or IPS 15.6in FHD(1920 x 1080)",
+    "price": "699",
+    "description": "Beyond the Acer Swift 3's modest exterior, you'll find an excellent laptop that boasts plenty of power for work and study. The Swift 3 (not to be confused with the Switch 3 another laptop from Acer) is an inexpensive laptop; however, that plain chassis is all-aluminum and packed with beefy components."
   }
 ]
